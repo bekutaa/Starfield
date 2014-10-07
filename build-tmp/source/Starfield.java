@@ -1,8 +1,24 @@
+import processing.core.*; 
+import processing.data.*; 
+import processing.event.*; 
+import processing.opengl.*; 
+
+import java.util.HashMap; 
+import java.util.ArrayList; 
+import java.io.File; 
+import java.io.BufferedReader; 
+import java.io.PrintWriter; 
+import java.io.InputStream; 
+import java.io.OutputStream; 
+import java.io.IOException; 
+
+public class Starfield extends PApplet {
+
 int frameCount = 0;
 
 Particle [] ichi;
 
-void setup()
+public void setup()
 {
 	size(600,600);
 	background(0);
@@ -20,7 +36,7 @@ void setup()
 		}
 	}
 }
-void draw()
+public void draw()
 {
 	if( !(frameCount > 5))
 	{
@@ -33,6 +49,14 @@ void draw()
 	{
 		ichi[i].move();
 		ichi[i].show();
+
+		// if(frameCount > 5)
+		// {
+		// 	if(dist( (float)ichi[i].myX,(float)ichi[i].myY, 300,300) <= ichi[i].mySpeed/2)
+		// 	{
+		// 		println("ichi[" + i + "] turn");
+		// 	}
+		// }
 	}
 }
 class NormalParticle implements Particle
@@ -67,11 +91,11 @@ class NormalParticle implements Particle
 
 		if(orientation)
 		{
-			myAngle -= 0.02;
+			myAngle -= 0.02f;
 		}
 		else 
 		{
-			myAngle += 0.02;	
+			myAngle += 0.02f;	
 		}
 	}
 
@@ -81,13 +105,14 @@ class NormalParticle implements Particle
 		fill(myColor);
 		ellipse((float)myX,(float)myY,5,5);
 	}
-}
+
+} //the pink bar was bothering me
 
 interface Particle
 {
 	public void move();
 	public void show();
-}
+} //the pink bar was bothering me
 
 class OddballParticle implements Particle
 {
@@ -105,7 +130,7 @@ class OddballParticle implements Particle
 
 	public void move()
 	{
-		if(Math.random() > 0.5)
+		if(Math.random() > 0.5f)
 		{
 			myX += ( Math.cos(myAngle) * mySpeed);
 		}
@@ -113,7 +138,7 @@ class OddballParticle implements Particle
 		{
 			myX -= ( Math.cos(myAngle) * mySpeed);
 		}
-		if(Math.random() > 0.5)
+		if(Math.random() > 0.5f)
 		{
 			myY += ( Math.sin(myAngle) * mySpeed);
 		}
@@ -130,6 +155,15 @@ class OddballParticle implements Particle
 		fill(myColor);
 		ellipse((float)myX,(float)myY,7,7);
 	}
+} //the pink bar was bothering me
+
+
+  static public void main(String[] passedArgs) {
+    String[] appletArgs = new String[] { "Starfield" };
+    if (passedArgs != null) {
+      PApplet.main(concat(appletArgs, passedArgs));
+    } else {
+      PApplet.main(appletArgs);
+    }
+  }
 }
-
-
