@@ -15,7 +15,7 @@ void setup()
 	size(600,600);
 	background(0);
 
-	ichi = new Particle[301];
+	ichi = new Particle[501];
 	for(int i = 0; i < ichi.length; i++)
 	{
 		if(i == ichi.length-1)
@@ -35,7 +35,7 @@ void draw()
 
 	if(trail)
 	{
-		fill(0,0,0,12);
+		fill(0,0,0,15);
 		rect(-10,-10,width+100,height+100);
 	}
 	else
@@ -111,7 +111,6 @@ class NormalParticle implements Particle
 			if(dist( (float)myX,(float)myY, 300,300) <= mySpeed/2)
 			{
 				orientation = !orientation;
-				// swirl = !swirl;
 			}
 		}
 		
@@ -132,7 +131,7 @@ class NormalParticle implements Particle
 	{
 		noStroke();
 		fill(myColor);
-		ellipse((float)myX,(float)myY,5,5);
+		ellipse((float)myX,(float)myY,3,3);
 	}
 }
 
@@ -161,10 +160,12 @@ class OddballParticle implements Particle
 		oldX = myX;
 		oldY = myY;
 
+		int randomPause = ((int)(Math.random()*3)+1)*5;
+
 		myX += (2*(Math.cos(myAngle) * mySpeed)) - (Math.cos(myAngle) * mySpeed);
 		myY += (2*(Math.sin(myAngle) * mySpeed)) - (Math.sin(myAngle) * mySpeed);
 
-		if(frameCount%15 == 0)
+		if(frameCount%randomPause == 0)
 		{
 			myAngle = Math.random()*2*Math.PI;
 		}
