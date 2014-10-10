@@ -12,10 +12,10 @@ interface Particle
 
 void setup()
 {
-	size(600,600);
+	size(1000,700);
 	background(0);
 
-	ichi = new Particle[501];
+	ichi = new Particle[701];
 	for(int i = 0; i < ichi.length; i++)
 	{
 		if(i == ichi.length-1)
@@ -108,7 +108,7 @@ class NormalParticle implements Particle
 		
 		if(frameCount > 5)
 		{
-			if(dist( (float)myX,(float)myY, 300,300) <= mySpeed/2)
+			if(dist( (float)myX,(float)myY, width/2,height/2) <= mySpeed/2)
 			{
 				orientation = !orientation;
 			}
@@ -152,7 +152,7 @@ class OddballParticle implements Particle
 
 	public void redo()
 	{
-
+		
 	}
 
 	public void move()
