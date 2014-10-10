@@ -20,7 +20,8 @@ header {
 }
 
 footer {
-	font-style: italic;
+	color: white;
+    font-style: italic;
 	font-size: 90%;
 }
 
