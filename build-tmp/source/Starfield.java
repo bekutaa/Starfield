@@ -28,10 +28,10 @@ interface Particle
 
 public void setup()
 {
-	size(1000,700);
+	size(900,600);
 	background(0);
 
-	ichi = new Particle[701];
+	ichi = new Particle[601];
 	for(int i = 0; i < ichi.length; i++)
 	{
 		if(i == ichi.length-1)
@@ -96,7 +96,7 @@ class NormalParticle implements Particle
 		myX = width/2;
 		myY = height/2;
 
-		mySpeed = Math.random()*4;
+		mySpeed = Math.random()*4.5f;
 		myAngle = Math.random()*2*Math.PI;
 		orientation = false;
 		swirl = true;
@@ -108,7 +108,7 @@ class NormalParticle implements Particle
 		myX = width/2;
 		myY = height/2;
 
-		mySpeed = Math.random()*4;
+		mySpeed = Math.random()*4.5f;
 		myAngle = Math.random()*2*Math.PI;
 		swirl = !swirl;
 		if(swirl)
@@ -168,7 +168,7 @@ class OddballParticle implements Particle
 
 	public void redo()
 	{
-
+		
 	}
 
 	public void move()
