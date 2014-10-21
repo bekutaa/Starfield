@@ -22,6 +22,10 @@ void setup()
 		{
 			ichi[i] = new OddballParticle();
 		}
+		else if(i == ichi.length-2)
+		{
+			ichi[i] = new Jumbo();
+		}
 		else
 		{
 			ichi[i] = new NormalParticle();
@@ -80,7 +84,7 @@ class NormalParticle implements Particle
 		myX = width/2;
 		myY = height/2;
 
-		mySpeed = Math.random()*4.5;
+		mySpeed = Math.random()*4;
 		myAngle = Math.random()*2*Math.PI;
 		orientation = false;
 		swirl = true;
@@ -135,11 +139,26 @@ class NormalParticle implements Particle
 	}
 }
 
+class Jumbo extends NormalParticle
+{
+	Jumbo()
+	{
+
+	}
+	public void show()
+	{
+		noStroke();
+		fill(myColor);
+		ellipse((float)myX,(float)myY,20,20);
+	}
+}
+
 class OddballParticle implements Particle
 {
 	double myX, myY, mySpeed, myAngle;
 	double oldX, oldY;
-	int myColor;
+	int myColor, mySize;
+	boolean sizeChange;
 
 	OddballParticle()
 	{
@@ -148,6 +167,8 @@ class OddballParticle implements Particle
 		myY = height/2;
 		mySpeed = (Math.random()*3)+(Math.random()*4);
 		myAngle = Math.random()*2*Math.PI;
+		mySize = 10;
+		sizeChange = true;
 	}
 
 	public void redo()
@@ -170,26 +191,40 @@ class OddballParticle implements Particle
 			myAngle = Math.random()*2*Math.PI;
 		}
 
-		if(myX > width || myX < 0 )
+		// if(myX > width || myX < 0 )
+		if(myX + mySize > width || myX - mySize < 0)
 		{
 			myAngle = Math.PI - myAngle;
 		}
-		if(myY > height || myY < 0)
+		// if(myY > height || myY < 0)
+		if(myY + mySize > height || myY - mySize < 0)
 		{
 			myAngle = -1 * myAngle;
 		}
+
+		if(frameCount%90 == 0)
+		{
+			sizeChange = !sizeChange;
+		}
+
 	}
 
 	public void show()
 	{
+		if(frameCount%3 == 0)
+		{
+			if(sizeChange)
+			{
+				mySize++;
+			}
+			else
+			{
+				mySize--;	
+			}
+		}
+
 		noStroke();
 		fill(myColor);
-		ellipse((float)myX,(float)myY,10,10);
-
-		// strokeWeight(10);
-		// stroke(myColor);
-		// line((float)oldX,(float)oldY,(float)myX,(float)myY);
+		ellipse((float)myX,(float)myY,mySize,mySize);	
 	}
 }
-
-
